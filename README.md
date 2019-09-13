@@ -32,3 +32,5 @@ To update a password:
 ```
 pps-client -update -pass=foo <<< f7f9aa7a-d596-11e9-98e1-5be96b1732e6
 ```
+
+It is assumed that `-pass` is free of unbalanced quotes and is json-injection safe.
