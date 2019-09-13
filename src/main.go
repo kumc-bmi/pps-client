@@ -64,7 +64,7 @@ func main() {
 		var jsonStr = []byte(`{"Password": "` + *wordPtr + `"}`)
 		req, err := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonStr))
 		if err != nil {
-			log.Println("Error initializing request\n[ERRO] -", err)
+			log.Println("Error initializing request\n", err)
 			os.Exit(1)
 		}
 
@@ -76,7 +76,7 @@ func main() {
 		resp, err := client.Do(req)
 
 		if err != nil {
-			log.Println("Error on response.\n[ERRO] -", err)
+			log.Println("Error on response.\n", err)
 			os.Exit(1)
 		}
 
@@ -90,7 +90,7 @@ func main() {
 		// prepare get request
 		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
-			log.Println("Error initializing request\n[ERRO] -", err)
+			log.Println("Error initializing request\n", err)
 			os.Exit(1)
 		}
 
@@ -101,7 +101,7 @@ func main() {
 		resp, err := client.Do(req)
 
 		if err != nil {
-			log.Println("Error on response.\n[ERRO] -", err)
+			log.Println("Error on response.\n", err)
 			os.Exit(1)
 		}
 
