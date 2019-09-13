@@ -14,8 +14,8 @@ import (
 
 func main() {
 
-	TOKEN := os.Getenv("LOCKBOX")
-	URL := os.Getenv("LOCKBOX_URL")
+	token := os.Getenv("LOCKBOX")
+	url := os.Getenv("LOCKBOX_URL")
 
 	// parse args for '-update'
 	boolPtr := flag.Bool("update", false, "a bool")
@@ -24,45 +24,45 @@ func main() {
 
 	// read item id from stdin, trim newline if needed
 	reader := bufio.NewReader(os.Stdin)
-	var ITEM string
-	ITEM, _ = reader.ReadString('\n')
-	ITEM = strings.TrimSuffix(ITEM, "\n")
+	var item string
+	item, _ = reader.ReadString('\n')
+	item = strings.TrimSuffix(item, "\n")
 
-	if TOKEN == "" {
+	if token == "" {
 		log.Println("missing LOCKBOX environment variable")
 		log.Println("usage (update): pps-client -update -pass=foo <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		log.Println("usage (retrieve): pps-client <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		os.Exit(1)
 	}
 
-	if URL == "" {
+	if url == "" {
 		log.Println("missing LOCKBOX_URL environment variable")
 		log.Println("usage (update): pps-client -update -pass=foo <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		log.Println("usage (retrieve): pps-client <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		os.Exit(1)
 	}
 
-	if ITEM == "" {
-		log.Println("missing ITEM")
+	if item == "" {
+		log.Println("missing item")
 		log.Println("usage (update): pps-client -update -pass=foo <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		log.Println("usage (retrieve): pps-client <<< f03d2746-c28e-11e9-aba2-df487c779baf")
 		os.Exit(1)
 	}
 
-	bearer := "Bearer " + TOKEN
-	URL = URL + "/api/v5/rest/Entries/"
+	bearer := "Bearer " + token
+	url = url + "/api/v5/rest/Entries/"
 
 	// if -update is defined, update the item; else, get the item
 	if *boolPtr {
 
-		URL = URL + ITEM
+		url = url + item
 
 		// parse args for '-pass'
 		//fmt.Println("pass:", *wordPtr)
 
 		// prepare patch request
 		var jsonStr = []byte(`{"Password": "` + *wordPtr + `"}`)
-		req, err := http.NewRequest("PATCH", URL, bytes.NewBuffer(jsonStr))
+		req, err := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonStr))
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Add("Authorization", bearer)
 
@@ -79,10 +79,10 @@ func main() {
 
 	} else {
 
-		URL = URL + ITEM + "/password"
+		url = url + item + "/password"
 
 		// prepare get request
-		req, err := http.NewRequest("GET", URL, nil)
+		req, err := http.NewRequest("GET", url, nil)
 		req.Header.Add("Authorization", bearer)
 
 		// send request
