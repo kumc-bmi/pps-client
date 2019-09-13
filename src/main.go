@@ -63,6 +63,11 @@ func main() {
 		// prepare patch request
 		var jsonStr = []byte(`{"Password": "` + *wordPtr + `"}`)
 		req, err := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonStr))
+		if err != nil {
+			log.Println("Error initializing request\n[ERRO] -", err)
+			os.Exit(1)
+		}
+
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Add("Authorization", bearer)
 
@@ -83,6 +88,11 @@ func main() {
 
 		// prepare get request
 		req, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+			log.Println("Error initializing request\n[ERRO] -", err)
+			os.Exit(1)
+		}
+
 		req.Header.Add("Authorization", bearer)
 
 		// send request
