@@ -77,6 +77,7 @@ func main() {
 
 		if err != nil {
 			log.Println("Error on response.\n[ERRO] -", err)
+			os.Exit(1)
 		}
 
 		body, _ := ioutil.ReadAll(resp.Body)
@@ -101,6 +102,7 @@ func main() {
 
 		if err != nil {
 			log.Println("Error on response.\n[ERRO] -", err)
+			os.Exit(1)
 		}
 
 		body, _ := ioutil.ReadAll(resp.Body)
