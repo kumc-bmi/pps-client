@@ -95,6 +95,7 @@ func main() {
 		}
 
 		req.Header.Add("Authorization", bearer)
+		req.Header.Add("X-Pleasant-Client-Identifier", "00000000-0000-0000-0000-000000000000")
 
 		// send request
 		client := &http.Client{}
