@@ -3,4 +3,4 @@ build:
 
 lint:
 	golint src/main.go ;\
-  mdl *.md -r ~MD013
+	mdl *.md -r ~MD013
