@@ -82,6 +82,8 @@ func fetchItem(url string, bearer string, item string, attachment string) (strin
 		return "", err
 	}
 
+	resp = resp[1 : len(resp)-1]
+
 	return resp, err
 }
 
